@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>인공지능 개념 및 알고리즘 발표</title>
+    <style>
+        body {
+            font-family: Pretendard, Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+        .slideshow-container {
+            max-width: 1000px;
+            position: relative;
+            margin: auto;
+            background: white;
+            padding: 20px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            border-radius: 10px;
+            margin-top: 100px;
+            height: fit-content;
+            min-height: 300px;
+        }
+        .slide {
+            display: none;
+            text-align: center;
+        }
+        .fade {
+            animation: fade 1.5s;
+        }
+        @keyframes fade {
+            from {opacity: .4} 
+            to {opacity: 1}
+        }
+        .prev, .next {
+            cursor: pointer;
+            position: absolute;
+            top: 50%;
+            width: auto;
+            margin-top: -22px;
+            padding: 16px;
+            color: white;
+            font-weight: bold;
+            font-size: 18px;
+            transition: 0.6s ease;
+            border-radius: 0 3px 3px 0;
+            user-select: none;
+            z-index: 1; /* Ensure arrows appear on top of slides */
+        }
+        .next {
+            right: 0;
+            border-radius: 3px 0 0 3px;
+        }
+        .prev {
+            left: 0;
+            border-radius: 3px 0 0 3px;
+        }
+        .prev:hover, .next:hover {
+            background-color: rgba(0,0,0,0.8);
+        }
+        canvas {
+            border: 1px solid black;
+            margin-top: 20px;
+            border-radius: 4px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+        .numbertext {
+            font-size: 12px;
+            padding: 8px 12px;
+            position: absolute;
+            top: 0;
+        }
+        h2 {
+            margin-top: 0;
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #4563eb;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #445566;
+        }
+        #output {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="slideshow-container">
+
+        <div class="slide fade">
+            <div class="numbertext">1 / 7</div>
+            <h1>수학에서 인공지능의 활용</h1>
+            <p>이 발표의 목적은 반 친구들에게 인공지능의 개념과, 이론에 대해 간단하게 설명하고,.</p>
+            <p>관심을 유도하는 데에 있습니다 :)</p>
+        </div>
+
+        <div class="slide fade">
+            <div class="numbertext">2 / 7</div>
+            <h2>인공지능 기초</h2>
+            <p>인공지능(AI)은 인간의 학습, 추론, 인식 능력을 기계로 구현하는 기술.</p>
+            <p>AI의 역사는 1950년대부터 시작되었으며, 현재는 기계 학습과 딥러닝 기술이 주요한 발전을 이루고 있음.</p>
+        </div>
+
+        <div class="slide fade">
+            <div class="numbertext">3 / 7</div>
+            <h2>수학과 인공지능의 관계</h2>
+            <p>수학은 AI 알고리즘의 기반을 이루는 중요한 역할을 합니다.</p>
+            <p>기본적인 통계와 기하학 개념이 AI의 핵심 알고리즘에 사용됩니다.</p>
+        </div>
+
+        <div class="slide fade">
+            <div class="numbertext">4 / 7</div>
+            <h2>K-최근접 이웃 알고리즘 (K-NN)</h2>
+            <p>K-NN은 새로운 데이터 포인트를 가장 가까운 K개의 이웃과 비교하여 분류하는 간단한 기계 학습 알고리즘입니다.</p>
+            <p>거리 계산 방법으로 점과 점 사이의 거리를 계산합니다.</p>
+            <p>원의 방정식을 사용하여 시각화해보겠습니다.</p>
+            <label for="knn-k">K 값: </label>
+            <input type="number" id="knn-k" value="3" min="1">
+            <button onclick="knnDemo()">K-NN 알고리즘 체험하기</button>
+            <canvas id="knnCanvas" width="500" height="500"></canvas>
+            <div id="knn-output"></div>
+        </div>
+        
+
+        <div class="slide fade">
+            <div class="numbertext">5 / 7</div>
+            <h2>K-평균 알고리즘 (K-Means)</h2>
+            <p>K-Means는 데이터를 K개의 클러스터로 나누는 군집화 알고리즘입니다.</p>
+            <p>중심점을 반복적으로 업데이트하여 클러스터를 형성합니다.</p>
+            <p>중심점과 거리 계산을 통해 시각화해보겠습니다.</p>
+            <label for="kmeans-k">군집 수: </label>
+            <input type="number" id="kmeans-k" value="3" min="1">
+            <button onclick="kmeansDemo()">K-Means 알고리즘 체험하기</button>
+            <canvas id="kmeansCanvas" width="500" height="500"></canvas>
+            <div id="kmeans-output"></div>
+        </div>
+        
+
+        <div class="slide fade">
+            <div class="numbertext">6 / 7</div>
+            <h2>결론 및 응용</h2>
+            <p>인공지능은 다양한 분야에서 의료부터 건설, 또는 일상생활등 수많은 분야에서 사용됩니다.</p>
+            <p>본 발표를 마치며, 인공지능에 대해 관심을 가져보는건 어떨까요?</p>
+        </div>
+
+        <div class="slide fade">
+            <div class="numbertext">7 / 7</div>
+            <h2>Q&A</h2>
+            <p>이따 발표 끝나고 함</p>
+        </div>
+
+        <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+        <a class="next" onclick="plusSlides(1)">&#10095;</a>
+    </div>
+
+    <script>
+        let slideIndex = 1;
+        showSlides(slideIndex);
+
+        function plusSlides(n) {
+            showSlides(slideIndex += n);
+        }
+
+        function currentSlide(n) {
+            showSlides(slideIndex = n);
+        }
+
+        function showSlides(n) {
+            let i;
+            let slides = document.getElementsByClassName("slide");
+            if (n > slides.length) {slideIndex = 1}    
+            if (n < 1) {slideIndex = slides.length}
+            for (i = 0; i < slides.length; i++) {
+                slides[i].style.display = "none";  
+            }
+            slides[slideIndex-1].style.display = "block";  
+        }
+        function knnDemo() {
+    let canvas = document.getElementById('knnCanvas');
+    let ctx = canvas.getContext('2d');
+    let output = document.getElementById('knn-output');
+
+    // K 값 가져오기
+    let k = parseInt(document.getElementById('knn-k').value);
+
+    // 초기화
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    // 예제 데이터
+    let points = [
+        {x: 200, y: 200, color: 'blue'},
+        {x: 320, y: 310, color: 'blue'},
+        {x: 330, y: 290, color: 'blue'},
+        {x: 300, y: 300, color: 'blue'},
+        {x: 320, y: 310, color: 'blue'},
+        {x: 340, y: 290, color: 'blue'},
+        {x: 200, y: 400, color: 'red'},
+        {x: 221, y: 210, color: 'red'},
+        {x: 240, y: 290, color: 'red'},
+        {x: 200, y: 200, color: 'red'},
+        {x: 220, y: 210, color: 'red'},
+        {x: 200, y: 140, color: 'red'}
+    ];
+    let queryPoint = {x: 275, y: 275};
+    let dragging = false;
+    let maxRadius = 300;
+    let stepSize = 20;
+    let radius = 0;
+
+    // 거리 계산 함수
+    function euclideanDistance(p1, p2) {
+        let sum = 0;
+        sum += Math.pow(p1.x - p2.x, 2);
+        sum += Math.pow(p1.y - p2.y, 2);
+        return Math.sqrt(sum);
+    }
+
+    // 시각화 함수
+    function draw() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+        // 기존 데이터 포인트 그리기
+        points.forEach(point => {
+            ctx.beginPath();
+            ctx.arc(point.x, point.y, 5, 0, 2 * Math.PI);
+            ctx.fillStyle = point.color;
+            ctx.fill();
+        });
+
+        // 쿼리 포인트 그리기
+        ctx.beginPath();
+        ctx.arc(queryPoint.x, queryPoint.y, 5, 0, 2 * Math.PI);
+        ctx.fillStyle = 'black';
+        ctx.fill();
+    }
+
+    // 원을 단계별로 그리기
+    function drawStep() {
+        if (radius <= maxRadius) {
+            draw();
+
+            // 현재 반지름으로 원 그리기
+            ctx.beginPath();
+            ctx.arc(queryPoint.x, queryPoint.y, radius, 0, 2 * Math.PI);
+            ctx.strokeStyle = 'black';
+            ctx.stroke();
+
+            // 원 안에 있는 이웃 찾기
+            let neighbors = points.filter(point => euclideanDistance(point, queryPoint) <= radius);
+
+            if (neighbors.length >= k) {
+                let blueCount = 0;
+                let redCount = 0;
+
+                neighbors.forEach(neighbor => {
+                    if (neighbor.color === 'blue') blueCount++;
+                    if (neighbor.color === 'red') redCount++;
+                });
+
+                let newColor = blueCount > redCount ? 'blue' : 'red';
+
+                // 쿼리 포인트를 새로운 색으로 다시 그리기
+                ctx.beginPath();
+                ctx.arc(queryPoint.x, queryPoint.y, 5, 0, 2 * Math.PI);
+                ctx.fillStyle = newColor;
+                ctx.fill();
+
+                output.innerHTML = `Query Point: (${queryPoint.x}, ${queryPoint.y})<br>Classified as: ${newColor}`;
+            } else {
+                radius += stepSize;
+                setTimeout(drawStep, 1000); // 1초마다 한 단계씩 그리기
+            }
+        } else {
+            output.innerHTML = `Query Point: (${queryPoint.x}, ${queryPoint.y})`;
+        }
+    }
+
+    // 드래그 이벤트 처리
+    canvas.onmousedown = function(e) {
+        let rect = canvas.getBoundingClientRect();
+        let x = e.clientX - rect.left;
+        let y = e.clientY - rect.top;
+        if (euclideanDistance({x, y}, queryPoint) < 10) {
+            dragging = true;
+        }
+    };
+
+    canvas.onmousemove = function(e) {
+        if (dragging) {
+            let rect = canvas.getBoundingClientRect();
+            queryPoint.x = e.clientX - rect.left;
+            queryPoint.y = e.clientY - rect.top;
+            draw();
+        }
+    };
+
+    canvas.onmouseup = function() {
+        dragging = false;
+        radius = 0;
+        drawStep();
+    };
+
+    // 초기 그리기
+    draw();
+}
+
+function kmeansDemo() {
+    let canvas = document.getElementById('kmeansCanvas');
+    let ctx = canvas.getContext('2d');
+    let output = document.getElementById('kmeans-output');
+
+    // 군집 수 가져오기
+    let k = parseInt(document.getElementById('kmeans-k').value);
+
+    // 초기화
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    // 예제 데이터
+    let points = [
+        {x: 100, y: 100, color: 'blue'},
+        {x: 120, y: 130, color: 'blue'},
+        {x: 150, y: 110, color: 'blue'},
+        {x: 200, y: 200, color: 'red'},
+        {x: 220, y: 230, color: 'red'},
+        {x: 250, y: 210, color: 'red'},
+        {x: 300, y: 300, color: 'blue'},
+        {x: 320, y: 330, color: 'blue'},
+        {x: 350, y: 310, color: 'blue'},
+        {x: 400, y: 400, color: 'red'},
+        {x: 420, y: 430, color: 'red'},
+        {x: 450, y: 410, color: 'red'}
+    ];
+
+    // 거리 계산 함수
+    function euclideanDistance(p1, p2) {
+        let sum = 0;
+        sum += Math.pow(p1.x - p2.x, 2);
+        sum += Math.pow(p1.y - p2.y, 2);
+        return Math.sqrt(sum);
+    }
+
+    // K-Means 알고리즘
+    function kMeans(points, k) {
+        // 임의로 초기 중심점 선택
+        let centroids = points.slice(0, k);
+        let clusters = new Array(points.length);
+        let changed = true;
+
+        function updateClusters() {
+            changed = false;
+            for (let i = 0; i < points.length; i++) {
+                let minDist = Infinity;
+                let cluster = 0;
+                for (let j = 0; j < centroids.length; j++) {
+                    let dist = euclideanDistance(points[i], centroids[j]);
+                    if (dist < minDist) {
+                        minDist = dist;
+                        cluster = j;
+                    }
+                }
+                if (clusters[i] !== cluster) {
+                    changed = true;
+                    clusters[i] = cluster;
+                }
+            }
+        }
+
+        function updateCentroids() {
+            let newCentroids = new Array(k).fill(0).map(() => new Array(2).fill(0));
+            let counts = new Array(k).fill(0);
+            for (let i = 0; i < points.length; i++) {
+                let cluster = clusters[i];
+                newCentroids[cluster][0] += points[i].x;
+                newCentroids[cluster][1] += points[i].y;
+                counts[cluster]++;
+            }
+            for (let j = 0; j < k; j++) {
+                newCentroids[j][0] /= counts[j];
+                newCentroids[j][1] /= counts[j];
+            }
+            centroids = newCentroids.map(c => ({x: c[0], y: c[1]}));
+        }
+
+        function drawClusters() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            points.forEach((point, index) => {
+                ctx.beginPath();
+                ctx.arc(point.x, point.y, 5, 0, 2 * Math.PI);
+                ctx.fillStyle = clusters[index] === 0 ? 'blue' : clusters[index] === 1 ? 'green' : 'red';
+                ctx.fill();
+            });
+
+            centroids.forEach((centroid, index) => {
+                ctx.beginPath();
+                ctx.arc(centroid.x, centroid.y, 10, 0, 2 * Math.PI);
+                ctx.fillStyle = 'yellow';
+                ctx.fill();
+                ctx.stroke();
+            });
+        }
+
+        function step() {
+            if (changed) {
+                updateClusters();
+                updateCentroids();
+                drawClusters();
+                setTimeout(step, 1000); // 1초마다 한 단계씩 실행
+            }
+        }
+
+        step();
+        return {centroids, clusters};
+    }
+
+    let result = kMeans(points, k);
+
+    output.innerHTML = `Clusters: ${JSON.stringify(result.clusters)}<br>Centroids: ${JSON.stringify(result.centroids)}`;
+}
+
+ </script>
+</body>
+</html>
